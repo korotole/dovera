@@ -107,11 +107,3 @@ def run_from_check_output(out: dict) -> dict:
         "results": out.get("results", []),
         "meta": meta,
     }
-
-
-class StoreUnavailable(RuntimeError):
-    pass
-
-
-def default_store() -> CheckStore:
-    return JsonFileStore()
