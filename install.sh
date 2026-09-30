@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# One-liner installer for the Annex 13 checker.
+# One-liner installer for dovera.
 #
 #   ./install.sh          # install + verify (creates .venv via uv)
 #
@@ -17,9 +17,12 @@ fi
 uv sync
 echo
 echo "Installed. Try:"
-echo "  uv run annex13 <pdf-or-folder>            # CLI check"
-echo "  uv run annex13-ui                          # GUI (http://localhost:8600)"
-echo "  uv run annex13-store                       # GraphQL store (http://localhost:8700)"
+echo "  dovera check <pdf-or-folder>   # check document(s) against a checklist"
+echo "  dovera checklists              # list available checklists"
+echo "  dovera ui                      # web UI (http://localhost:8600)"
+echo "  dovera store                   # GraphQL store (http://localhost:8700)"
 echo
-echo "Env needed: ANTHROPIC_AUTH_TOKEN (or ANTHROPIC_API_KEY), optionally ANTHROPIC_BASE_URL."
+echo "Backend: set ANTHROPIC_AUTH_TOKEN (or OPENAI_API_KEY), or use a local"
+echo "model via Ollama: ollama serve && ollama pull qwen3:14b, then"
+echo "  dovera check doc.pdf --backend ollama"
 echo "Scanned PDFs need OCR: brew install tesseract tesseract-lang"

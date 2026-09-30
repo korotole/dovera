@@ -9,15 +9,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN pip install --no-cache-dir uv
 
 WORKDIR /app
-COPY pyproject.toml README.md ./
-COPY invoice_agent ./invoice_agent
+COPY pyproject.toml README.md uv.lock ./
+COPY dovera ./dovera
 
 RUN uv sync --no-dev
 
 ENV PATH="/app/.venv/bin:$PATH"
-ENV ANNEX13_UI_PORT=8600
 
 EXPOSE 8600 8700
 
-# default: GUI. Override: docker run annex13-store / annex13 <pdf>
-CMD ["annex13-ui"]
+# default: GUI. Override: docker run dovera-store / dovera check <pdf>
+CMD ["dovera", "ui"]
